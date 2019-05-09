@@ -24,7 +24,7 @@ addParameters({
         enableShortcuts: false,
         theme: create({
             base: 'light',
-            brandTitle: 'Buildertrend styleguide',
+            brandTitle: 'Superhero Story',
             brandUrl: '#',
             brandImage: 'https://buildertrend.net/images/FontIcons/buildertrend-logo-full.svg',
         })
