@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Superhero.csproj"
+                "${workspaceFolder}/../Superhero.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -17,7 +17,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Superhero.csproj"
+                "${workspaceFolder}/../Superhero.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -28,7 +28,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/Superhero.csproj"
+                "${workspaceFolder}/../Superhero.csproj"
             ],
             "problemMatcher": "$tsc"
         }
