@@ -9,7 +9,6 @@ namespace Superhero.Controllers
     [Route("api/[controller]")]
     public class SuperheroController : Controller
     {
-        #region GET
         [HttpGet]
         public List<SuperheroEntity> GetSuperheros()
         {
@@ -21,25 +20,6 @@ namespace Superhero.Controllers
         {
             return _Superheros.FirstOrDefault(s => s.Id == id);
         }
-
-        [HttpGet("Planets")]
-        public List<SelectOption> GetPlanets()
-        {
-            return planetsList;
-        }
-
-        [HttpGet("Universes")]
-        public List<SelectOption> GetUniverses()
-        {
-            return universesList;
-        }
-
-        [HttpGet("Abilities")]
-        public List<SelectOption> GetAbilities()
-        {
-            return abilitiesList;
-        }
-        #endregion GET
 
         [HttpPost]
         public SuperheroEntity SaveSuperhero(SuperheroEntity hero)
@@ -70,41 +50,6 @@ namespace Superhero.Controllers
                 _Superheros.RemoveAt(heroindex);
             }
         }
-
-
-        static protected List<SelectOption> planetsList = new List<SelectOption>()
-        {
-            new SelectOption { Id = 1, Name = "Krypton" },
-            new SelectOption { Id = 2, Name = "Xandar" },
-            new SelectOption { Id = 3, Name = "Hala" },
-            new SelectOption { Id = 4, Name = "Oa" },
-            new SelectOption { Id = 5, Name = "Titan" },
-            new SelectOption { Id = 6, Name = "Ego" },
-            new SelectOption { Id = 7, Name = "Knowhere" }
-        };
-
-        static protected List<SelectOption> universesList = new List<SelectOption>() {
-            new SelectOption { Id = 1, Name = "Marvel" },
-            new SelectOption { Id = 2, Name = "DC" },
-            new SelectOption { Id = 3, Name = "Other" }
-        };
-
-        static protected List<SelectOption> abilitiesList = new List<SelectOption>() {
-            new SelectOption { Id = 1, Name = "Fly" },
-            new SelectOption { Id = 2, Name = "Superhuman Strength" },
-            new SelectOption { Id = 3, Name = "Energy Absorption" },
-            new SelectOption { Id = 4, Name = "Superhuman Speed" },
-            new SelectOption { Id = 5, Name = "Superhuman Stamina" },
-            new SelectOption { Id = 6, Name = "Superhuman Durability" },
-            new SelectOption { Id = 7, Name = "Photographic Memory" },
-            new SelectOption { Id = 8, Name = "Superhuman Agility" },
-            new SelectOption { Id = 9, Name = "Speed Reading" },
-            new SelectOption { Id = 10, Name = "Regenerative Healing" },
-            new SelectOption { Id = 11, Name = "Telepathy" },
-            new SelectOption { Id = 12, Name = "Terrible Singing" },
-            new SelectOption { Id = 13, Name = "Object/Money" },
-            new SelectOption { Id = 14, Name = "CSI Zoom Focus" }
-        };
 
         public class SuperheroEntity
         {
@@ -137,12 +82,6 @@ namespace Superhero.Controllers
                 Abilities = new List<int>() { 2, 5, 6, 8 }
             }
         };
-
-        public class SelectOption
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
-        }
 
         private int GetNewId()
         {
