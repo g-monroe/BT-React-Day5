@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Superhero.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class SuperheroController : Controller
     {
         [HttpGet]
