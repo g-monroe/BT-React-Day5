@@ -1,9 +1,8 @@
 import React from 'react';
 import { SuperheroHandler, ISuperheroHandler } from '../../utilities/SuperheroHandler';
 import { SuperheroItem } from '../../types/superhero/SuperheroItem';
-import  SuperheroForm  from './SuperheroForm';
+import { Link } from 'react-router-dom';
 import { Spin } from 'antd';
-import ListHeros from './ListHeros';
 interface ISuperheroProps{
     id: number;
     superHeroHandler?: ISuperheroHandler;
@@ -12,37 +11,19 @@ interface ISuperheroState{
     result?: SuperheroItem;
     results?: SuperheroItem[];
 }
-export default class SuperHero extends React.Component<ISuperheroProps, ISuperheroState>{
+export default class ListHeros extends React.Component<ISuperheroProps, ISuperheroState>{
     
     static defaultProps = {
-        id: 6161962,
+        id: undefined,
         superHeroHandler: new SuperheroHandler()
     }
     state: ISuperheroState = {
-        result: undefined,
         results: undefined,
     }
     componentDidMount = async () => {
-        const {superHeroHandler, id} = this.props;
-        if (id){
-            const result = await superHeroHandler!.getById(id);
-            this.setState({result});
-        }else{
             const results = await this.getHeroes();
             this.setState({results});
-        }
     }
-    handleSave = async (entity: SuperheroItem): Promise<void> => {
-        const updateEntity = entity.id
-          ? await this.props.superHeroHandler!.updateById(entity.id, entity)
-          : await this.props.superHeroHandler!.createHero(entity)
-          this.setState({
-            result: updateEntity
-          })
-      }
-      deleteItem = async (id: number): Promise<void> => {
-          await this.props.superHeroHandler!.deleteById(id)
-      }
      getHeroes = async () => {
         const {superHeroHandler, id} = this.props;
         if (!id){
@@ -56,12 +37,12 @@ export default class SuperHero extends React.Component<ISuperheroProps, ISuperhe
         if (!this.state.result && this.state.results){
             return (
                 <>
-                <ListHeros/>
+                {this.state.results.map(h => <><span>{h.heroName}</span><Link key={h.id} to={{pathname: `/superhero/${h.id}`,state: {id: h.id, type: "put"}}}>(Click Here)</Link></>)}
                 </>
             );
         }else if (this.state.result && !this.state.results){
-            return(
-                <SuperheroForm superHeroItem={this.state.result} handleSave={this.handleSave} deleteItem={this.deleteItem}/>
+            return (
+                <Spin/>
             );
 
         }

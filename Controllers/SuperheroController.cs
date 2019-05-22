@@ -43,13 +43,14 @@ namespace Superhero.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void DeleteSuperhero(int id)
+        public IActionResult DeleteSuperhero(int id)
         {
             int heroindex = _Superheros.FindIndex(h => h.Id == id);
             if (heroindex >= 0)
             {
                 _Superheros.RemoveAt(heroindex);
             }
+            return Ok(new {});
         }
 
         public class SuperheroEntity

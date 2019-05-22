@@ -1,8 +1,11 @@
 import {default as sampleJson } from './sampleJson.superhero.json';
 import { ISuperheroHandler } from './SuperheroHandler.js';
-import { SuperheroItem } from '../types/superhero/superhero.js';
+import { SuperheroItem } from '../types/superhero/SuperheroItem.js';
 
 export default class fakeSuperheroHandler implements ISuperheroHandler{
+    getAll(): Promise<import("../types/superhero/SuperheroItems.js").default> {
+        throw new Error("Method not implemented.");
+    }
     createHero(hero: SuperheroItem): Promise<SuperheroItem> {
         throw new Error("Method not implemented.");
     }

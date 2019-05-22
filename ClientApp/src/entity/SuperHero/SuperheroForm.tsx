@@ -10,10 +10,11 @@ import FormItem from 'antd/lib/form/FormItem';
 import TextArea from 'antd/lib/input/TextArea';
 import { universesList, abilitiesList } from '../../types/superhero/dropdownValues';
 import { __values } from 'tslib';
-import { SuperheroItem } from '../../types/superhero/superhero';
-
+import { SuperheroItem } from '../../types/superhero/SuperheroItem';
 
 interface ISuperheroFormProps {
+    deleteItem: (id: number) => Promise<void>; 
+    handleSave: (entity: SuperheroItem) => Promise<void>;
     superHeroItem: SuperheroItem;
 }
 
@@ -48,17 +49,14 @@ class SuperheroForm extends React.Component<InjectedFormikProps<ISuperheroFormPr
   getValidStatus = (error:any) => {
     return !!error ? 'error' : 'success';
   }
-  
+
   render() {
     const {values, errors, handleChange, isSubmitting} = this.props;
-    //console.log(values);
-    //console.log(errors);
-   // console.log({"abilities": values.abilities, "props": this.props, "errors": errors});
     return (
       <div>
         <Layout>
         <Header>
-        <Text mark>Ant Design</Text>
+        <Text mark></Text>
         </Header>
         <Layout>
           <Content>
@@ -100,6 +98,9 @@ class SuperheroForm extends React.Component<InjectedFormikProps<ISuperheroFormPr
               <Button loading={isSubmitting} onClick={this.props.handleSubmit} type="primary">
                     Submit
                   </Button>
+                  <Button loading={isSubmitting} onClick={() => this.props.deleteItem(this.props.superHeroItem.id!)} type="primary">
+                    Delete
+                  </Button>
               </FormItem>
             </Form>
             <hr/>
@@ -130,12 +131,10 @@ const myComponent =  withFormik<ISuperheroFormProps, ISuperheroFormState>({
     abilities: props.superHeroItem.abilities
   }),
   validationSchema: heroSchema,
-  handleSubmit: (values, { setSubmitting }) =>  {
-    console.log("your values:", values);
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
+  handleSubmit: async (values, { setSubmitting, props }) =>  {
+      console.log("your values:", values);
+      await props.handleSave(new SuperheroItem(values));
       setSubmitting(false);
-    }, 1000);
   }
   
 });
