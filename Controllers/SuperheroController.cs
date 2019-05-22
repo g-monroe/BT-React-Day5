@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Superhero.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class SuperheroController : Controller
     {
         [HttpGet]
@@ -16,9 +17,14 @@ namespace Superhero.Controllers
         }
 
         [HttpGet("{id}")]
-        public SuperheroEntity GetSuperhero(int? id)
+        public IActionResult GetSuperhero(int? id)
         {
-            return _Superheros.FirstOrDefault(s => s.Id == id);
+            var result = _Superheros.FirstOrDefault(s => s.Id == id);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return Ok(new { });
         }
 
         [HttpPost]
@@ -42,13 +48,14 @@ namespace Superhero.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void DeleteSuperhero(int id)
+        public IActionResult DeleteSuperhero(int id)
         {
             int heroindex = _Superheros.FindIndex(h => h.Id == id);
             if (heroindex >= 0)
             {
                 _Superheros.RemoveAt(heroindex);
             }
+            return Ok(new { });
         }
 
         public class SuperheroEntity
