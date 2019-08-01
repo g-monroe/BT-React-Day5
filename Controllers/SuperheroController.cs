@@ -17,9 +17,14 @@ namespace Superhero.Controllers
         }
 
         [HttpGet("{id}")]
-        public SuperheroEntity GetSuperhero(int? id)
+        public IActionResult GetSuperhero(int? id)
         {
-            return _Superheros.FirstOrDefault(s => s.Id == id);
+            var result = _Superheros.FirstOrDefault(s => s.Id == id);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return Ok(new { });
         }
 
         [HttpPost]
