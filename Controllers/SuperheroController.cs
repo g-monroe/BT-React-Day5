@@ -55,7 +55,7 @@ namespace Superhero.Controllers
             {
                 _Superheros.RemoveAt(heroindex);
             }
-            return Ok(new { });
+            return Ok(new {});
         }
 
         public class SuperheroEntity

@@ -1,0 +1,16 @@
+{
+    "id": 6161962,
+    "heroName": "Spiderman",
+    "secretIdentity": "Clark",
+    "age": 18,
+    "firstAppearance": 1987,
+    "isAlien": false,
+    "originStory": "From a spider",
+    "wikiUrl": "http://google.com",
+    "universe": 1,
+    "abilities": [
+        1,
+        2,
+        3
+    ]
+}
