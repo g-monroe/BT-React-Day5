@@ -14,7 +14,7 @@
     "formik": "1.5.1",
     "less": "3.9.0",
     "less-loader": "4.1.0",
-    "moment": "2.24.0",
+    "moment": "2.29.4",
     "node-sass": "4.10.0",
     "query-string": "6.4.0",
     "react": "16.8.5",
